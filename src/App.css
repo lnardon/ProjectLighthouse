@@ -1,0 +1,11 @@
+* {
+  font-family: "Noto Sans JP", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(15, 15, 15);
+}
