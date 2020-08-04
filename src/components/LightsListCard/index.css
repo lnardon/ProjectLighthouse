@@ -12,15 +12,20 @@
 
 .lightImage {
   width: 50px;
+  margin-right: 1rem;
 }
 
 .infoDiv {
   display: flex;
+  flex: 2;
   color: #fafafa;
 }
 
 .lightSwitcher {
   display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 }
 
 .lightToggle {
@@ -30,4 +35,14 @@
   font-size: 1rem;
   font-weight: bold;
   color: #f1f1f1;
+}
+
+.off {
+  filter: grayscale(0);
+  opacity: 0.2;
+}
+
+.on {
+  filter: grayscale();
+  opacity: 1;
 }

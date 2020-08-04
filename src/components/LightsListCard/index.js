@@ -11,15 +11,17 @@ const LightsListCard = ({ bulb, toggle }) => {
         <img
           src={bulb.capabilities.model === "stripe" ? stipeImg : bulbImage}
           alt="Light"
-          className="lightImage"
+          className={`lightImage ${
+            bulb.capabilities.power === "on" ? "on" : "off"
+          }`}
         />
       </div>
       <div className="infoDiv">
-        <h2> {bulb.ip} </h2>
+        <h2> {bulb.capabilities.name} </h2>
       </div>
       <div className="lightSwitcher">
         <button className="lightToggle" onClick={() => toggle(bulb.ip)}>
-          ON
+          {bulb.capabilities.power === "on" ? "ON" : "OFF"}
         </button>
       </div>
     </div>

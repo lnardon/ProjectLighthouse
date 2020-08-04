@@ -22,9 +22,8 @@ for bulb in raw_bulbs:
 @app.route('/bulbsList')
 @cross_origin()
 def bulbsList():
-    # response = flask.Response()
-    # response.headers["Access-Control-Allow-Origin"] = "*"
-  return jsonify({"body": raw_bulbs})
+    print(bulbs[0].get_properties())
+    return jsonify({"body": raw_bulbs})
 
 # Turns all the lights on
 @app.route('/on')
@@ -81,6 +80,18 @@ def toggleId():
     for bulb in bulbs:
         if str(bulb._ip) == b:
             bulb.toggle()
+    return {}
+
+# Turns the specified bulb on/off based on the IP address
+@app.route('/setLightName', methods=['POST'])
+@cross_origin()
+def setLightName():
+    b = str(request.headers.get('lampIp'))
+    name = request.headers.get('name')
+    for bulb in bulbs:
+        if str(bulb._ip) == b:
+            bulb.set_name(name)
+            print(bulb.get_properties())
     return {}
 
 app.run(host= '0.0.0.0', port=4555, debug=True)
