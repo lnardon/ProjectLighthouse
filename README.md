@@ -1,6 +1,6 @@
-# Front-end Apllication to the Project Lighthouse application
+# Project Lighthouse
 
-Keep in my that this project still under development and new features will be implemented.
+Local app to control all Yeelight lights.
 
 ## Demo
 
