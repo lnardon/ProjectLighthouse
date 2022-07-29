@@ -1,14 +1,18 @@
 const YeeDiscovery = require("yeelight-platform").Discovery;
-const discoveryService = new YeeDiscovery();
 const express = require("express");
+const cors = require("cors");
+const discoveryService = new YeeDiscovery();
 const app = express();
+app.use(cors());
 
 let list = [];
 discoveryService.on("started", () => {
   console.log("Lighthouse Scan Started!");
 });
 discoveryService.on("didDiscoverDevice", (device) => {
-  list.push(device);
+  if (list.filter((item) => device.id === item.id).length <= 0) {
+    list.push(device);
+  }
 });
 discoveryService.listen();
 
@@ -17,4 +21,8 @@ app.get("/getAllLights", (req, res) => {
   res.json(list);
 });
 
-app.listen(process.env.port || 3000);
+app.get("/getAllLights", (req, res) => {
+  res.json(list);
+});
+
+app.listen(process.env.REACT_APP_SERVER_PORT || 4321);
