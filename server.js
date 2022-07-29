@@ -32,13 +32,7 @@ app.get("/getAllLights", (req, res) => {
 });
 
 app.post("/turnLightOn", (req, res) => {
-  const body = {
-    host: "192.168.0.101",
-    port: "55443",
-    id: "0x000000000456b205",
-  };
-
-  const device = new YeeDevice({ host: body.host, port: body.port });
+  const device = new YeeDevice({ host: req.body.host, port: req.body.port });
   device.connect();
   device.on("deviceUpdate", (newProps) => {
     device.disconnect();
@@ -46,7 +40,7 @@ app.post("/turnLightOn", (req, res) => {
   });
   device.on("connected", () => {
     device.sendCommand({
-      id: body.id,
+      id: req.body.id,
       method: "set_power",
       params: ["on", "smooth", 300],
     });
@@ -54,26 +48,35 @@ app.post("/turnLightOn", (req, res) => {
 });
 
 app.post("/turnLightOff", (req, res) => {
-  const body = {
-    host: "192.168.0.101",
-    port: "55443",
-    id: "0x000000000456b205",
-  };
-
-  const device = new YeeDevice({ host: body.host, port: body.port });
+  const device = new YeeDevice({ host: req.body.host, port: req.body.port });
   device.connect();
   device.on("deviceUpdate", (newProps) => {
+    device.disconnect();
     console.log(newProps);
   });
   device.on("connected", () => {
     device.sendCommand({
-      id: body.id,
+      id: req.body.id,
       method: "set_power",
       params: ["off", "smooth", 300],
     });
   });
+});
 
-  device.disconnect();
+app.post("/toggleLight", (req, res) => {
+  const device = new YeeDevice({ host: req.body.host, port: req.body.port });
+  device.connect();
+  device.on("deviceUpdate", (newProps) => {
+    device.disconnect();
+    console.log(newProps);
+  });
+  device.on("connected", () => {
+    device.sendCommand({
+      id: req.body.id,
+      method: "toggle",
+      params: [],
+    });
+  });
 });
 
 app.listen(process.env.REACT_APP_SERVER_PORT || 4321);

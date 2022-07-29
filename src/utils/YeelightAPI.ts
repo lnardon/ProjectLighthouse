@@ -22,7 +22,8 @@ export const YeelightAPI = {
       {
         method: "POST",
         headers: {
-          ContentType: "application/json",
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ host, port, id }),
       }
@@ -45,7 +46,32 @@ export const YeelightAPI = {
       {
         method: "POST",
         headers: {
-          ContentType: "application/json",
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ host, port, id }),
+      }
+    );
+    return await raw.json();
+  },
+
+  async toggleLight({
+    host,
+    port,
+    id,
+  }: {
+    host: string;
+    port: string;
+    id: string;
+  }) {
+    console.log({ host, port, id });
+    let raw = await fetch(
+      `http://localhost:${process.env.REACT_APP_SERVER_PORT}/toggleLight`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ host, port, id }),
       }
