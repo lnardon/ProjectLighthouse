@@ -7,6 +7,8 @@ const cors = require("cors");
 const discoveryService = new YeeDiscovery();
 const app = express();
 
+const hexToDecimal = (hex) => parseInt(hex, 16);
+
 app.use(cors());
 app.use(
   bodyParser.urlencoded({
@@ -37,6 +39,7 @@ app.post("/turnLightOn", (req, res) => {
   device.on("deviceUpdate", (newProps) => {
     device.disconnect();
     console.log(newProps);
+    res.json(newProps);
   });
   device.on("connected", () => {
     device.sendCommand({
@@ -53,6 +56,7 @@ app.post("/turnLightOff", (req, res) => {
   device.on("deviceUpdate", (newProps) => {
     device.disconnect();
     console.log(newProps);
+    res.json(newProps);
   });
   device.on("connected", () => {
     device.sendCommand({
@@ -69,12 +73,32 @@ app.post("/toggleLight", (req, res) => {
   device.on("deviceUpdate", (newProps) => {
     device.disconnect();
     console.log(newProps);
+    res.json(newProps);
   });
   device.on("connected", () => {
     device.sendCommand({
       id: req.body.id,
       method: "toggle",
       params: [],
+    });
+  });
+});
+
+app.post("/setLightColor", (req, res) => {
+  const device = new YeeDevice({ host: req.body.host, port: req.body.port });
+  device.connect();
+  device.on("deviceUpdate", (newProps) => {
+    device.disconnect();
+    console.log(newProps);
+    res.json(newProps);
+  });
+  let color = req.body.color;
+  color = color.replace(/[#]/g, "");
+  device.on("connected", () => {
+    device.sendCommand({
+      id: req.body.id,
+      method: "set_rgb",
+      params: [hexToDecimal(color), "smooth", 700],
     });
   });
 });

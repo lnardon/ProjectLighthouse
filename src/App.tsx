@@ -27,11 +27,20 @@ function App() {
                 power={light.power}
                 model={light.model}
                 id={light.id}
+                rgb={light.rgb}
                 onClick={async () =>
                   await YeelightAPI.toggleLight({
                     host: light.host,
                     port: light.port,
                     id: light.id,
+                  })
+                }
+                changeColor={async (color) =>
+                  await YeelightAPI.setLightColor({
+                    host: light.host,
+                    port: light.port,
+                    id: light.id,
+                    color: color,
                   })
                 }
               />
