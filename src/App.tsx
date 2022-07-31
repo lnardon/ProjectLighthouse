@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { YeelightAPI } from "./utils/YeelightAPI";
 import BasicLightCard from "./components/BasicLightCard";
+import ExpandableArea from "./components/ExpandableArea";
 import { IBasicLight } from "./interfaces/IBasicLight";
 import "./App.css";
 
@@ -18,26 +19,27 @@ function App() {
       <h1>Project Lighthouse</h1>
       {lights.map((light: IBasicLight) => {
         return (
-          <BasicLightCard
-            key={light.id}
-            power={light.power}
-            model={light.model}
-            id={light.id}
+          <ExpandableArea
+            title={light.id}
+            content={
+              <BasicLightCard
+                key={light.id}
+                power={light.power}
+                model={light.model}
+                id={light.id}
+                onClick={async () =>
+                  await YeelightAPI.toggleLight({
+                    host: light.host,
+                    port: light.port,
+                    id: light.id,
+                  })
+                }
+              />
+            }
           />
         );
       })}
       <button onClick={getAllLights}>Get Lights</button>
-      <button
-        onClick={async () =>
-          await YeelightAPI.turnLightOn({
-            host: lights[2].host,
-            port: lights[2].port,
-            id: lights[2].id,
-          })
-        }
-      >
-        TURN ON
-      </button>
     </div>
   );
 }
