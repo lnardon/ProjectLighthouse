@@ -16,14 +16,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Project Lighthouse</h1>
+      <h1 className="title">Project Lighthouse</h1>
       {lights.map((light: IBasicLight) => {
         return (
           <ExpandableArea
+            key={light.id}
             title={light.id}
             content={
               <BasicLightCard
-                key={light.id}
                 power={light.power}
                 model={light.model}
                 id={light.id}
@@ -39,7 +39,11 @@ function App() {
           />
         );
       })}
-      <button onClick={getAllLights}>Get Lights</button>
+      {lights.length <= 0 && (
+        <button className="scanBtn" onClick={getAllLights}>
+          Scan Lights
+        </button>
+      )}
     </div>
   );
 }
