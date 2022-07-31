@@ -103,4 +103,21 @@ app.post("/setLightColor", (req, res) => {
   });
 });
 
+app.post("/setLightBrightness", (req, res) => {
+  const device = new YeeDevice({ host: req.body.host, port: req.body.port });
+  device.connect();
+  device.on("deviceUpdate", (newProps) => {
+    device.disconnect();
+    console.log(newProps);
+    res.json(newProps);
+  });
+  device.on("connected", () => {
+    device.sendCommand({
+      id: req.body.id,
+      method: "set_bright",
+      params: [parseInt(req.body.value), "smooth", 700],
+    });
+  });
+});
+
 app.listen(process.env.REACT_APP_SERVER_PORT || 4321);
