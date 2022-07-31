@@ -1,20 +1,23 @@
-import React from "react";
 import styles from "./styles.module.css";
 
 function BasicLightCard({
   power,
   model,
   id,
+  onClick,
 }: {
   power: string;
   model: string;
   id: string;
+  onClick: () => Promise<any>;
 }) {
   return (
-    <div>
-      <h1 className={styles.name}>{id}</h1>
+    <div className={styles.container}>
       <h2>{model}</h2>
       <h3>{power}</h3>
+      <button className={styles.toggleBtn} onClick={onClick}>
+        Toggle
+      </button>
     </div>
   );
 }
