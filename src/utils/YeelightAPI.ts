@@ -100,4 +100,29 @@ export const YeelightAPI = {
     );
     return await raw.json();
   },
+
+  async setLightBrightness({
+    host,
+    port,
+    id,
+    value,
+  }: {
+    host: string;
+    port: string;
+    id: string;
+    value: string;
+  }) {
+    let raw = await fetch(
+      `http://localhost:${process.env.REACT_APP_SERVER_PORT}/setLightBrightness`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ host, port, id, value }),
+      }
+    );
+    return await raw.json();
+  },
 };

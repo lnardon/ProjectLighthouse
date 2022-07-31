@@ -28,6 +28,7 @@ function App() {
                 model={light.model}
                 id={light.id}
                 rgb={light.rgb}
+                bright={light.bright}
                 onClick={async () =>
                   await YeelightAPI.toggleLight({
                     host: light.host,
@@ -41,6 +42,14 @@ function App() {
                     port: light.port,
                     id: light.id,
                     color: color,
+                  })
+                }
+                changeBrightness={async (value: string) =>
+                  await YeelightAPI.setLightBrightness({
+                    host: light.host,
+                    port: light.port,
+                    id: light.id,
+                    value: value,
                   })
                 }
               />
