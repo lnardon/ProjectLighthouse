@@ -2,7 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
   padding: 0rem 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
 .toggleBtn {
@@ -11,5 +20,37 @@
   border: 2px solid #fafafa;
   color: #fafafa;
   border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.colorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.colorPickerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.colorPicker {
+  cursor: pointer;
+}
+
+.colorBtn {
+  font-size: 0.85rem;
+  background-color: transparent;
+  border: 2px solid #fafafa;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  color: #fafafa;
+  margin-bottom: 1rem;
+  width: 100%;
   cursor: pointer;
 }

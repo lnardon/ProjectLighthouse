@@ -16,7 +16,6 @@ export const YeelightAPI = {
     port: string;
     id: string;
   }) {
-    console.log({ host, port, id });
     let raw = await fetch(
       `http://localhost:${process.env.REACT_APP_SERVER_PORT}/turnLightOn`,
       {
@@ -40,7 +39,6 @@ export const YeelightAPI = {
     port: string;
     id: string;
   }) {
-    console.log({ host, port, id });
     let raw = await fetch(
       `http://localhost:${process.env.REACT_APP_SERVER_PORT}/turnLightOff`,
       {
@@ -64,7 +62,6 @@ export const YeelightAPI = {
     port: string;
     id: string;
   }) {
-    console.log({ host, port, id });
     let raw = await fetch(
       `http://localhost:${process.env.REACT_APP_SERVER_PORT}/toggleLight`,
       {
@@ -74,6 +71,31 @@ export const YeelightAPI = {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ host, port, id }),
+      }
+    );
+    return await raw.json();
+  },
+
+  async setLightColor({
+    host,
+    port,
+    id,
+    color,
+  }: {
+    host: string;
+    port: string;
+    id: string;
+    color: string;
+  }) {
+    let raw = await fetch(
+      `http://localhost:${process.env.REACT_APP_SERVER_PORT}/setLightColor`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ host, port, id, color }),
       }
     );
     return await raw.json();
