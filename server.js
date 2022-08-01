@@ -3,6 +3,7 @@ const YeeDevice = require("yeelight-platform").Device;
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 const discoveryService = new YeeDiscovery();
 const app = express();
@@ -16,6 +17,8 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static("public"));
 
 let list = [];
 discoveryService.on("started", () => {

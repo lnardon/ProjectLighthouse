@@ -29,6 +29,7 @@
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .colorPickerContainer {
@@ -53,4 +54,19 @@
   margin-bottom: 1rem;
   width: 100%;
   cursor: pointer;
+}
+
+.brightness {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brightnessInput {
+  padding: 0.25rem;
+  font-size: 1rem;
+  width: 50px;
+  text-align: center;
+  border-radius: 0.25rem;
 }

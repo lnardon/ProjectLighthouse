@@ -11,7 +11,7 @@ App to control Yeelight lights on local network.
 ## Installation
 
 - Clone the repo and run `yarn` on your terminal to install the necessary dependencies
-- Run `yarn dev`, this script will start the back end server and the React Front-End server on port 3000.
+- Run `yarn start`, this script will start the back end server and the React Front-End server on port 3000.
 
 ### Official Docs
 

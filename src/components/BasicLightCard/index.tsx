@@ -36,7 +36,7 @@ function BasicLightCard({
       </div>
       <div className={styles.colorContainer}>
         <div className={styles.colorPickerContainer}>
-          <h3>Light Color:</h3>
+          <h3>Color:</h3>
           <input
             type="color"
             value={color}
@@ -49,15 +49,12 @@ function BasicLightCard({
         </button>
       </div>
       <div className={styles.brightness}>
-        <h3>Light Brightness:</h3>
+        <h3>Brightness:</h3>
         <input
-          type="range"
+          type="number"
           value={brightness}
           onChange={(e) => setBrightness(e.target.value)}
-          className={styles.colorPicker}
-          min={1}
-          step={1}
-          max={100}
+          className={styles.brightnessInput}
         />
       </div>
       <button
